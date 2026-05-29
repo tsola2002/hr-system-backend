@@ -19,7 +19,7 @@ class CustomerController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Customer $id)
+    public function show(string $id)
     {
         //
         return Customer::findOrFail($id);
