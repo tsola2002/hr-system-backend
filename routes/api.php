@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CustomerController;
 use Illuminate\Support\Facades\Route;
 
@@ -17,6 +18,8 @@ use Illuminate\Support\Facades\Route;
 |-----------------------------------------
 */
 
+// Login route
+Route::post('/login', [AuthController::class, 'login']);
 
 
 Route::get('/ping', function () {
@@ -25,17 +28,25 @@ Route::get('/ping', function () {
     ]);
 });
 
-// Get all customers
-Route::get('/customers', [CustomerController::class, 'index']);
 
-// Get single customer by ID
-Route::get('/customers/{id}', [CustomerController::class, 'show']);
 
-// Create customer
-Route::post('/customers', [CustomerController::class, 'store']);
+Route::middleware('auth:api')->group(function () {
 
-// Update customer
-Route::put('/customers/{id}', [CustomerController::class, 'update']);
+    // Logout
+    Route::post('/logout', [AuthController::class, 'logout']);
 
-// Delete customer
-Route::delete('/customers/{id}', [CustomerController::class, 'destroy']);
+    // Current logged in user
+    Route::get('/me', [AuthController::class, 'me']);
+
+    // Customer CRUD
+    Route::get('/customers', [CustomerController::class, 'index']);
+
+    Route::get('/customers/{customer}', [CustomerController::class, 'show']);
+
+    Route::post('/customers', [CustomerController::class, 'store']);
+
+    Route::put('/customers/{customer}', [CustomerController::class, 'update']);
+
+    Route::delete('/customers/{customer}', [CustomerController::class, 'destroy']);
+
+});
