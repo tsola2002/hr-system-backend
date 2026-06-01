@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Customer;
 use Illuminate\Http\Request;
 
+
+
 class CustomerController extends Controller
 {
 
@@ -12,6 +14,20 @@ class CustomerController extends Controller
 
     /**
      * Display a listing of the resource.
+     */
+    /**
+     
+     * @OA\Get(
+     *     path="/api/customers",
+     *     tags={"Customers"},
+     *     summary="Get all customers",
+     *     security={{"bearerAuth":{}}},
+     *
+     *     @OA\Response(
+     *          response=200,
+     *          description="Success"
+     *     )
+     * )
      */
     public function index()
     {
