@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\LeaveController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -48,5 +49,9 @@ Route::middleware('auth:api')->group(function () {
     Route::put('/customers/{customer}', [CustomerController::class, 'update']);
 
     Route::delete('/customers/{customer}', [CustomerController::class, 'destroy']);
+
+
+    // LEAVE CRUD
+    Route::apiResource('leaves', LeaveController::class);
 
 });
