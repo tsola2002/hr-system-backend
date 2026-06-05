@@ -54,4 +54,8 @@ Route::middleware('auth:api')->group(function () {
     // LEAVE CRUD
     Route::apiResource('leaves', LeaveController::class);
 
+    // LEAVE APPROVAL
+    Route::put('/leaves/{leave}/approve', [LeaveController::class, 'approve']);
+    Route::put('/leaves/{leave}/reject', [LeaveController::class, 'reject']);
+
 });
